@@ -56,7 +56,6 @@ def test_imdb_movie(
     )
     resp_data = resp.json()
     assert resp.status_code == 200
-    print(resp_data["data"])
     assert resp_data["status_code"] == 200
 
     data = resp_data["data"]

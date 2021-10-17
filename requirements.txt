@@ -2,4 +2,5 @@ pydantic
 requests
 fastapi[all]
 beautifulsoup4
+click
 

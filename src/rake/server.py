@@ -10,9 +10,9 @@ app = FastAPI()
 @app.post("/scrape", response_model=ScrapedData)
 def scrape(req: ScrapeRequest):
     """
-    This endpoint is used as an interface to dynamically load Plugins and execute loaded Scraper.
-    For more information check the Scraper Protocol in the schemas file in the rake directory.
-    For Dynamic import a helper function from the utils module is used.
+    This endpoint is used as an interface to dynamically load Plugins and execute the loaded Scraper.
+    For more information check the Scraper Protocol in the protocols file.
+    Dynamic import is handled by a helper function from the utils module.
     """
     try:
         plugin = load_plugin(req.plugin)

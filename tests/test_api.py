@@ -63,4 +63,34 @@ def test_imdb_movie(
     for key, val in expectations.items():
         assert data[key] == val
 
+@mark.parametrize(
+    "request_data, request_model, expectations",
+    [
+        (
+            {"plugin": "rym_album", "slug": "release/album/klaus-schulze/irrlicht/"},
+            ScrapeRequest,
+            {"artist": "Klaus Schulze"}
+            )
+        ]
+    )
+def test_rym_album(
+    request_data: Dict[str, str],
+    request_model: ScrapeRequest,
+    expectations: Dict[str, str]
+    ):
+    req = request_model(**request_data)
+    resp = client.post(
+        "/scrape",
+        data=req.json()
+    )
+    resp_data = resp.json()
+    
+    assert resp.status_code == 200
+    assert resp_data["status_code"] == 200
 
+    data = resp_data["data"]
+    assert len(data["track_list"]) > 0
+    assert len(data["track_list"]) == 3
+
+    for key, val in expectations.items():
+        assert data[key] == val

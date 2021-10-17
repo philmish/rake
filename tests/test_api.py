@@ -34,3 +34,34 @@ def test_scraper(
         if k in data["headers"]:
             assert data["headers"][k] == v
 
+@mark.parametrize(
+    "request_data, request_model, expectations",
+    [
+        (
+            {"plugin": "imdb_movie", "slug": "title/tt8772262/?ref_=fn_al_tt_1"},
+            ScrapeRequest,
+            {"title": "Midsommar"}
+            )
+        ]
+    )
+def test_imdb_movie(
+    request_data: Dict,
+    request_model: ScrapeRequest,
+    expectations: Dict
+    ):
+    req = request_model(**request_data)
+    resp = client.post(
+        "/scrape",
+        data=req.json()
+    )
+    resp_data = resp.json()
+    assert resp.status_code == 200
+    print(resp_data["data"])
+    assert resp_data["status_code"] == 200
+
+    data = resp_data["data"]
+
+    for key, val in expectations.items():
+        assert data[key] == val
+
+

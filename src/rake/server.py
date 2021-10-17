@@ -8,7 +8,7 @@ from rake.utils.loader import load_plugin
 app = FastAPI()
 
 @app.post("/scrape", response_model=ScrapedData)
-def scrape(req: ScrapeRequest):
+def scrape(req: ScrapeRequest) -> ScrapedData:
     """
     This endpoint is used as an interface to dynamically load Plugins and execute the loaded Scraper.
     For more information check the Scraper Protocol in the protocols file.

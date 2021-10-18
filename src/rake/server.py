@@ -1,9 +1,10 @@
+from typing import Dict, List
 from fastapi import FastAPI, HTTPException
 from rake.errors.plugins import PluginError
 from rake.errors.scraper import ScraperError
 from rake.meta_schemas import ScrapeRequest, ScrapedData
 
-from rake.utils.loader import load_plugin
+from rake.utils.loader import get_all_plugins, load_plugin
 
 app = FastAPI()
 
@@ -34,6 +35,12 @@ def scrape(req: ScrapeRequest) -> ScrapedData:
         )
 
     return resp
+
+
+@app.get("/rake/plugins", response_model=Dict[str,List[str]])
+def get_plugins():
+    mods = get_all_plugins()
+    return {"plugins": mods}
 
 
 @app.get("/logs")

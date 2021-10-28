@@ -37,6 +37,7 @@ class Scraper:
             album = AlbumBase.from_soup(souped)
             return ScrapedData(
                 link=self.target,
+                plugin="rym_album",
                 data=album.dict(),
                 status_code=self.data.status_code,
                 response_header=self.data.headers
@@ -46,6 +47,7 @@ class Scraper:
             print(e)
             return ScrapedData(
                 link=self.target,
+                plugin="rym_album",
                 data=e,
                 status_code=500,
                 response_header={"headers": ""}

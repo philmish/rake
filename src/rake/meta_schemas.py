@@ -56,11 +56,11 @@ class ScrapeRequest(BaseModel):
 class ScrapedData(BaseModel):
     """Represents the response of the rake api."""
     link: str
+    plugin: str
     status_code: int
     response_header: Dict[str,Any]
     timestamp: Optional[datetime] = Field(
         default_factory=lambda: datetime.now()
         )
     data: Any
-
 

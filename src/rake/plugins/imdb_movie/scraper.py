@@ -37,6 +37,7 @@ class Scraper:
             movie = MovieBase.from_soup(souped)
             return ScrapedData(
                 link=self.target,
+                plugin="imdb_movie",
                 data=movie.dict(),
                 status_code=self.data.status_code,
                 response_header=self.data.headers
@@ -44,6 +45,7 @@ class Scraper:
         except Exception as e:
             return ScrapedData(
                 link=self.target,
+                plugin="imdb_movie",
                 data=e,
                 status_code=500,
                 response_header={"headers": ""}

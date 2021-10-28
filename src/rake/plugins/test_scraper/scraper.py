@@ -35,6 +35,7 @@ class Scraper:
         body = self.data.json()
         return ScrapedData(
             link=self.target,
+            plugin="test_scraper",
             data=body,
             status_code=self.data.status_code,
             response_header=self.data.headers

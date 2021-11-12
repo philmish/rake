@@ -13,7 +13,9 @@ def up(mode):
     elif mode.lower() in ["env_file", "envfile", "env"]:
         from rake.config import RakeSettingsEnvFile
         settings = RakeSettingsEnvFile()
-
+    elif mode.lower() in ["var", "vars", "envar", "envvars"]:
+        from rake.config import RakeSettingsEnvVar
+        settings = RakeSettingsEnvVar()
     else:
         raise UnknownStartMode(f"{mode} is not an accaptable start mode.")
 

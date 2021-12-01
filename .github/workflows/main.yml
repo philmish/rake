@@ -2,8 +2,8 @@ name: rake test
 
 
 on:
-  push
-  pull_request
+  - push
+  - pull_request
 
 
 jobs:

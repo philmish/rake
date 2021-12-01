@@ -8,9 +8,9 @@ class RakeSettingsBase(BaseSettings):
 
 
 class RakeSettingsEnvFile(RakeSettingsBase):
-    
+
     class Config:
-        env_file=".env"
+        env_file = ".env"
 
 
 class RakeSettingsEnvVar(RakeSettingsBase):

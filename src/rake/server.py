@@ -8,6 +8,7 @@ from rake.utils.loader import get_all_plugins, load_plugin
 
 app = FastAPI()
 
+
 @app.post("/scrape", response_model=ScrapedData)
 def scrape(req: ScrapeRequest) -> ScrapedData:
     """
@@ -17,19 +18,17 @@ def scrape(req: ScrapeRequest) -> ScrapedData:
     """
     try:
         plugin = load_plugin(req.plugin)
-        scraper = plugin(req)
-    
+        scraper = plugin(req) #type:ignore
     except PluginError as e:
-        return HTTPException(
+        raise HTTPException(
             status_code=500,
             detail=f"Failed to load Plugin:\n\n{e}"
         )
-    
+
     try:
         resp = scraper.execute()
-
     except ScraperError as e:
-        return HTTPException(
+        raise HTTPException(
             status_code=500,
             detail=f"Failed to scrape data:\n\n{e}"
         )
@@ -37,7 +36,7 @@ def scrape(req: ScrapeRequest) -> ScrapedData:
     return resp
 
 
-@app.get("/rake/plugins", response_model=Dict[str,List[str]])
+@app.get("/rake/plugins", response_model=Dict[str, List[str]])
 def get_plugins():
     mods = get_all_plugins()
     return {"plugins": mods}

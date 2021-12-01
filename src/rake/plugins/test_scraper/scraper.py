@@ -1,6 +1,4 @@
 import requests
-from bs4 import BeautifulSoup as soup
-
 from rake.meta_schemas import ScrapeRequest, ScrapedData
 
 
@@ -46,5 +44,3 @@ class Scraper:
         self.scrape()
         self.session.close()
         return self.parse()
-        
-

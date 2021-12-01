@@ -33,7 +33,7 @@ class ScrapeRequest(BaseModel):
         default_factory=lambda: Headers().dict()
         )
     method: str = "GET"
-    
+
     @validator("plugin")
     def validate_plug(cls, v):
         mods = get_submodules(plugins)
@@ -58,9 +58,8 @@ class ScrapedData(BaseModel):
     link: str
     plugin: str
     status_code: int
-    response_header: Dict[str,Any]
+    response_header: Dict[str, Any]
     timestamp: Optional[datetime] = Field(
         default_factory=lambda: datetime.now()
         )
     data: Any
-

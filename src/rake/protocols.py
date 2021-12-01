@@ -1,5 +1,6 @@
 from typing import Protocol
 
+
 class Scraper(Protocol):
 
     def prep(self):
